@@ -1,12 +1,2500 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Question 3 Docker Demo</title>
-  </head>
-  <body>
-    <h1>Question 3 Docker Demo</h1>
-    <p>The application is running in an Nginx container.</p>
-  </body>
+Node.js – 38 Solution Folder Guide
+Questions, original source code, folder/file setup, and run instructions
+Source fidelity note: Code blocks below are copied directly from the uploaded ZIP for the listed project files. No source-code corrections or rewrites have been made. Generated dependency folders (node_modules), Git metadata, and package-lock.json files are omitted; run npm install in projects that include package.json to recreate dependencies.
+Important inventory note
+The ZIP contains 38 distinct question/project folders (listed below), not 39 distinct folders. I have documented every one of the 38 folders found. The archive has gaps/overlaps in its numbering (for example, some folders use Q1-style names and others use 10Q-style names). I have not invented a missing 39th solution.
+How to use this guide
+•	Extract the ZIP, then open the Nodejs_Solve folder in VS Code or another editor.
+•	For each exercise, create/use the exact folder name shown and create the listed files with the exact names.
+•	Copy the corresponding code/data shown below into those files. Preserve filenames and relative paths.
+•	Open a terminal in that exercise's folder. If package.json is listed, run: npm install.
+•	Run the command shown for that exercise. For web servers, open http://localhost:3000 in a browser when instructed.
+•	MySQL exercises require a running MySQL server, the database/tables named in the source, and correct local credentials. MongoDB exercises require a running MongoDB server. The original source connection settings are preserved; update them only if your local setup differs.
+ 
+1. Q1_prime_perfect
+Question
+Create a reusable module that checks whether a number is prime and perfect, then import it in an application that asks the user for a number and displays both results.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/Q1_prime_perfect/
+•	app.js
+•	check.js
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/Q1_prime_perfect.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file check.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+6. Run: node app.js
+7. When prompted in the terminal, type the requested input and press Enter.
+Answer – exact source and supporting files
+app.js
+const x = require('./check');
+ 
+const r = require('readline').createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+ 
+r.question("Enter a number: ", function(n)
+{
+    n = Number(n);
+ 
+    console.log(x.prime(n));
+    console.log(x.perfect(n));
+ 
+    r.close();
+});
+check.js
+function prime(n)
+{
+    let c = 0;
+ 
+    for(let i = 1; i <= n; i++)
+    {
+        if(n % i == 0)
+            c++;
+    }
+ 
+    if(c == 2)
+        return "Prime";
+    else
+        return "Not Prime";
+}
+ 
+function perfect(n)
+{
+    let sum = 0;
+ 
+    for(let i = 1; i < n; i++)
+    {
+        if(n % i == 0)
+            sum = sum + i;
+    }
+ 
+    if(sum == n && n > 0)
+        return "Perfect";
+    else
+        return "Not Perfect";
+};
+ 
+module.exports = { prime, perfect }
+ 
+2. Q2_circle
+Question
+Create a circle module that calculates area and circumference for a radius, and use it from an application that accepts the radius from the user.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/Q2_circle/
+•	app.js
+•	circle.js
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/Q2_circle.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file circle.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+6. Run: node app.js
+7. When prompted in the terminal, type the requested input and press Enter.
+Answer – exact source and supporting files
+app.js
+const c = require('./circle');
+ 
+const r = require('readline').createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+ 
+r.question('Enter the radius of the circle:',function(n){
+    n = Number(n);
+ 
+    console.log('Area of the circle is:', c.area(n));
+    console.log('Circumference of the circle is:', c.circumference(n));
+ 
+    r.close()
+});
+circle.js
+function area(r){
+    return 3.14 * r *r;
+}
+ 
+function circumference(r){
+    return 2 * 3.14 * r;
+}
+ 
+module.exports ={ area, circumference};
+ 
+3. Q4_factorial
+Question
+Create a factorial module and import it into an application that accepts a number and prints its factorial.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/Q4_factorial/
+•	app.js
+•	factorial.js
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/Q4_factorial.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file factorial.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+6. Run: node app.js
+7. When prompted in the terminal, type the requested input and press Enter.
+Answer – exact source and supporting files
+app.js
+const f = require('./factorial');
+ 
+const r = require('readline').createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+ 
+r.question('Enter the number to find factorial:',function(n){
+    n = Number(n);
+ 
+    console.log('Factorial of the number is:', f.factorial(n));
+ 
+    r.close()
+});
+factorial.js
+function factorial(n){
+    let fact = 1;
+    for (let i =1;i<=n;i++){
+        fact *= i;
+    }
+    return fact;
+}
+module.exports = {factorial};
+ 
+4. Q6
+Question
+Create an HTTP server that reads student details from student.json and displays the details in an HTML response.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/Q6/
+•	app.js
+•	student.json
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/Q6.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file student.json in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+6. Run: node app.js
+7. If the program starts a server, visit http://localhost:3000 in your browser (unless the console/source specifies a different address).
+Answer – exact source and supporting files
+app.js
+const fs = require('fs');
+const http = require('http');
+ 
+const server = http.createServer(function(req, res)
+{
+    fs.readFile('student.json', 'utf8', function(err, data)
+    {
+        const student = JSON.parse(data);
+ 
+        res.writeHead(200, {'Content-Type': 'text/html'});
+ 
+        res.write("<h1>Student Details</h1>");
+        res.write("<p>Roll No: " + student.rollno + "</p>");
+        res.write("<p>Name: " + student.name + "</p>");
+        res.write("<p>Course: " + student.course + "</p>");
+        res.write("<p>Marks: " + student.marks + "</p>");
+ 
+        res.end();
+    });
+});
+ 
+server.listen(3000, function()
+{
+    console.log("Server running at http://localhost:3000");
+});
+student.json
+{
+    "rollno": 101,
+    "name": "Avishkar",
+    "course": "MCA",
+    "marks": 85
+}
+ 
+5. Q7_fs_operation
+Question
+Demonstrate synchronous file-system operations: create/write a file, append text, read and display its contents, and delete the file.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/Q7_fs_operation/
+•	app.js
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/Q7_fs_operation.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+6. Run: node app.js
+Answer – exact source and supporting files
+app.js
+const fs = require('fs');
+ 
+fs.writeFileSync('student.txt', 'hello this is node.js');
+fs.appendFileSync('student.txt','\nthis is mca');
+let data= fs.readFileSync('student.txt', 'utf8');
+console.log('file content');
+console.log(data);
+fs.unlinkSync('student.txt');
+console.log('file deleted');
+
+ 
+6. Q8_stream
+Question
+Copy the contents of source.txt to destination.txt using Node.js readable and writable streams with pipe().
+Folder and files to create
+Create/open this folder: Nodejs_Solve/Q8_stream/
+•	app.js
+•	destination.txt
+•	source.txt
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/Q8_stream.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file destination.txt in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file source.txt in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+6. Run: node app.js
+Answer – exact source and supporting files
+app.js
+const fs = require('fs');
+ 
+// Read source file
+const read = fs.createReadStream('source.txt');
+ 
+// Create destination file
+const write = fs.createWriteStream('destination.txt');
+ 
+// Copy using pipe
+read.pipe(write);
+ 
+write.on('finish', function()
+{
+    console.log("File copied successfully");
+});
+destination.txt
+Hello Avishkar!
+This is Node.js Streams.
+We are copying this file.
+source.txt
+Hello Avishkar!
+This is Node.js Streams.
+We are copying this file.
+ 
+7. Q9_file_directory
+Question
+Use the fs module to check whether a path exists, determine whether it is a file or directory, and list directory contents.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/Q9_file_directory/
+•	app.js
+•	myfolder/file1.txt
+•	myfolder/file2.txt
+•	sample.txt
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/Q9_file_directory.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file myfolder/file1.txt in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file myfolder/file2.txt in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file sample.txt in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+6. Run: node app.js
+Answer – exact source and supporting files
+app.js
+const fs = require('fs');
+ 
+let name = 'myfolder'; // sample.txt , myfolder
+ 
+if(fs.existsSync(name))
+{
+    let s = fs.statSync(name);
+ 
+    if(s.isFile())
+    {
+        console.log("It is a file");
+    }
+    else if(s.isDirectory())
+    {
+        console.log("It is a directory");
+ 
+        let files = fs.readdirSync(name);
+ 
+        console.log("Files and folders:");
+ 
+        console.log(files);
+    }
+}
+else
+{
+    console.log("File or directory does not exist");
+}
+myfolder/file1.txt
+
+myfolder/file2.txt
+
+sample.txt
+hi this is node.js
+ 
+8. 10Q_sum
+Question
+Use separate modules to calculate a sum, importing the sum module into the application.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/10Q_sum/
+•	app.js
+•	sum.js
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/10Q_sum.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file sum.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+6. Run: node app.js
+7. If the program starts a server, visit http://localhost:3000 in your browser (unless the console/source specifies a different address).
+Answer – exact source and supporting files
+app.js
+const http = require('http');
+const sumDigits = require('./sum');
+ 
+const server = http.createServer(function(req, res)
+{
+    let number = 1234;
+    let result = sumDigits(number);
+ 
+    res.writeHead(200, {'Content-Type': 'text/html'});
+ 
+    res.write("<h2>Sum of Digits</h2>");
+    res.write("Number: " + number + "<br>");
+    res.write("Sum: " + result);
+ 
+    res.end();
+});
+ 
+server.listen(3000, function()
+{
+    console.log("Server running at http://localhost:3000");
+});
+sum.js
+function sumDigits(n)
+{
+    let sum = 0;
+ 
+    while(n > 0)
+    {
+        let digit = n % 10;
+        sum = sum + digit;
+        n = Math.floor(n / 10);
+    }
+ 
+    return sum;
+}
+ 
+module.exports = sumDigits;
+ 
+9. Q10_add_json
+Question
+Read student records from students.json, add a new student object, and write the updated array back to the JSON file.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/Q10_add_json/
+•	app.js
+•	students.json
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/Q10_add_json.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file students.json in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+6. Run: node app.js
+Answer – exact source and supporting files
+app.js
+const fs = require('fs');
+ 
+// Read existing JSON file
+let data = fs.readFileSync('students.json', 'utf8');
+ 
+// Convert JSON into JavaScript array
+let students = JSON.parse(data);
+ 
+// Add new student
+let newStudent = {
+    rollno: 103,
+    name: "Avishkar",
+    course: "MCA"
+};
+ 
+students.push(newStudent);
+ 
+// Convert array back into JSON
+let updatedData = JSON.stringify(students, null, 4);
+ 
+// Save updated data
+fs.writeFileSync('students.json', updatedData);
+ 
+console.log("Student record added successfully");
+console.log(students);
+students.json
+[
+    {
+        "rollno": 101,
+        "name": "Rahul",
+        "course": "MCA"
+    },
+    {
+        "rollno": 102,
+        "name": "Priya",
+        "course": "BCA"
+    },
+    {
+        "rollno": 103,
+        "name": "Avishkar",
+        "course": "MCA"
+    }
+]
+ 
+10. 11Q_profile
+Question
+Run the profile-related Node.js example contained in app.js.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/11Q_profile/
+•	app.js
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/11Q_profile.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+6. Run: node app.js
+7. If the program starts a server, visit http://localhost:3000 in your browser (unless the console/source specifies a different address).
+Answer – exact source and supporting files
+app.js
+const http = require('http');
+ 
+const server = http.createServer(function(req, res)
+{
+    res.writeHead(200, {'Content-Type': 'text/html'});
+ 
+    res.write("<h1>My Profile</h1>");
+    res.write("<h3>Name: Your Name</h3>");
+    res.write("<p>Course: MCA</p>");
+    res.write("<p>Specialization: Software Development</p>");
+    res.write("<p>Skills: Java, Python, Node.js</p>");
+    res.write("<p>College: SBUP Pune</p>");
+ 
+    res.end();
+});
+ 
+server.listen(3000, function()
+{
+    console.log("Server running at http://localhost:3000");
+});
+ 
+11. Q11_event
+Question
+Use EventEmitter to register and trigger login and logout events.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/Q11_event/
+•	app.js
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/Q11_event.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+6. Run: node app.js
+Answer – exact source and supporting files
+app.js
+const EventEmitter = require('events');
+ 
+const event = new EventEmitter();
+ 
+// Login event
+event.on('login', function()
+{
+    console.log("Welcome user");
+});
+ 
+// Logout event
+event.on('logout', function()
+{
+    console.log("Goodbye user");
+});
+ 
+// Trigger events
+event.emit('login');
+event.emit('logout');
+ 
+12. 12Q_listfiles
+Question
+Use Node.js file-system functionality to list the files in a folder.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/12Q_listfiles/
+•	app.js
+•	myfolder/file1.txt
+•	myfolder/file2.txt
+•	myfolder/file3.txt
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/12Q_listfiles.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file myfolder/file1.txt in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file myfolder/file2.txt in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file myfolder/file3.txt in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+6. Run: node app.js
+Answer – exact source and supporting files
+app.js
+const fs = require('fs');
+ 
+const files = fs.readdirSync('myfolder');
+ 
+console.log("Files in directory:");
+ 
+files.forEach(function(file)
+{
+    console.log(file);
+});
+myfolder/file1.txt
+
+myfolder/file2.txt
+
+myfolder/file3.txt
+
+ 
+13. Q12_orderplaced
+Question
+Use EventEmitter to create an orderPlaced event and pass an order ID and amount to its listener.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/Q12_orderplaced/
+•	app.js
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/Q12_orderplaced.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+6. Run: node app.js
+Answer – exact source and supporting files
+app.js
+const EventEmitter = require('events');
+ 
+const event = new EventEmitter();
+ 
+// Create event listener
+event.on('orderPlaced', function(id, amount)
+{
+    console.log("Order ID:", id);
+    console.log("Amount:", amount);
+});
+ 
+// Trigger event and pass values
+event.emit('orderPlaced', 101, 2500);
+ 
+14. 13Q_mysql_insert
+Question
+Insert a record into MySQL using the Node.js MySQL driver.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/13Q_mysql_insert/
+•	app.js
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/13Q_mysql_insert.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+4. Start MySQL and make sure the database and tables referenced in app.js already exist. The source uses its original host/user/password/database values; configure your local MySQL to match or edit credentials only if necessary.
+6. Run: node app.js
+Answer – exact source and supporting files
+app.js
+const mysql = require('mysql');
+ 
+const con = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'college_db'
+});
+ 
+con.connect(function(err)
+{
+    if(err) throw err;
+ 
+    console.log("Connected to MySQL!");
+ 
+    const sql = "INSERT INTO students (id, name, course, marks) VALUES ?";
+ 
+    const values = [
+        [1, 'Rahul', 'BCA', 80],
+        [2, 'Priya', 'MCA', 85],
+        [3, 'Amit', 'BBA', 75]
+    ];
+ 
+    con.query(sql, [values], function(err, result)
+    {
+        if(err) throw err;
+ 
+        console.log("3 student records inserted successfully!");
+ 
+        con.end();
+    });
+});
+ 
+ 
+ 
+// npm init -y
+// npm install mysql
+ 
+ 
+// CREATE DATABASE college_db;
+ 
+// USE college_db;
+ 
+// CREATE TABLE students (
+//     id INT PRIMARY KEY,
+//     name VARCHAR(50),
+//     course VARCHAR(50),
+//     marks INT
+// );
+ 
+15. Q13_multievent
+Question
+Register multiple listeners for one annualFunction event, trigger them, remove one listener, and trigger the event again.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/Q13_multievent/
+•	app.js
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/Q13_multievent.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+6. Run: node app.js
+Answer – exact source and supporting files
+app.js
+const EventEmitter = require('events');
+ 
+const event = new EventEmitter();
+ 
+// First listener
+function dance()
+{
+    console.log("Dance program is starting");
+}
+ 
+// Second listener
+function singing()
+{
+    console.log("Singing program is starting");
+}
+ 
+// Third listener
+function drama()
+{
+    console.log("Drama program is starting");
+}
+ 
+// Add multiple listeners
+event.on('annualFunction', dance);
+event.on('annualFunction', singing);
+event.on('annualFunction', drama);
+ 
+// Trigger event
+console.log("Before removing listener:");
+event.emit('annualFunction');
+ 
+// Remove one listener
+event.removeListener('annualFunction', singing);
+ 
+// Trigger event again
+console.log("\nAfter removing singing listener:");
+event.emit('annualFunction');
+ 
+16. 14Q_fileevents
+Question
+Demonstrate file-related event handling in Node.js using the supplied application and data file.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/14Q_fileevents/
+•	app.js
+•	data.txt
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/14Q_fileevents.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file data.txt in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+6. Run: node app.js
+Answer – exact source and supporting files
+app.js
+const EventEmitter = require('events');
+const fs = require('fs');
+ 
+const event = new EventEmitter();
+ 
+// Write event
+event.on('write', function()
+{
+    fs.writeFile('data.txt', 'Hello Node.js', function(err)
+    {
+        if(err) throw err;
+ 
+        console.log("File written successfully!");
+ 
+        event.emit('read');
+    });
+});
+ 
+// Read event
+event.on('read', function()
+{
+    fs.readFile('data.txt', 'utf8', function(err, data)
+    {
+        if(err) throw err;
+ 
+        console.log("File content:", data);
+    });
+});
+ 
+// Trigger write event
+event.emit('write');
+data.txt
+Hello Node.js
+ 
+17. Q14_express
+Question
+Create an Express server with Home, About, and Contact routes.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/Q14_express/
+•	app.js
+•	package.json
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/Q14_express.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file package.json in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+3. In a terminal opened inside this folder, run: npm install
+6. Run: node app.js
+7. If the program starts a server, visit http://localhost:3000 in your browser (unless the console/source specifies a different address).
+Answer – exact source and supporting files
+app.js
+const express = require('express');
+ 
+const app = express();
+ 
+// Home route
+app.get('/', function(req, res)
+{
+    res.send("<h1>Welcome to Home Page</h1>");
+});
+ 
+// About route
+app.get('/about', function(req, res)
+{
+    res.send("<h1>About Us</h1>");
+});
+ 
+// Contact route
+app.get('/contact', function(req, res)
+{
+    res.send("<h1>Contact Us</h1>");
+});
+ 
+// Start server
+app.listen(3000, function()
+{
+    console.log("Server running at http://localhost:3000");
+});
+package.json
+{
+  "name": "q14_express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}
+
+ 
+18. 15Q_loginvalid
+Question
+Run the logging/invalid-input example contained in app.js.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/15Q_loginvalid/
+•	app.js
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/15Q_loginvalid.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+4. Start MySQL and make sure the database and tables referenced in app.js already exist. The source uses its original host/user/password/database values; configure your local MySQL to match or edit credentials only if necessary.
+6. Run: node app.js
+Answer – exact source and supporting files
+app.js
+const mysql = require('mysql');
+ 
+const con = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'login_db'
+});
+ 
+con.connect(function(err)
+{
+    if(err) throw err;
+ 
+    let username = 'admin';
+    let password = '1234';
+ 
+    const sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+ 
+    con.query(sql, [username, password], function(err, result)
+    {
+        if(err) throw err;
+ 
+        if(result.length > 0)
+        {
+            console.log("Login Successful!");
+        }
+        else
+        {
+            console.log("Invalid Username or Password!");
+        }
+ 
+        con.end();
+    });
+});
+ 
+ 
+// npm init -y
+// npm install mysql
+ 
+ 
+// CREATE DATABASE login_db;
+ 
+// USE login_db;
+ 
+// CREATE TABLE users (
+//     username VARCHAR(50),
+//     password VARCHAR(50)
+// );
+ 
+// INSERT INTO users VALUES
+// ('admin', '1234'),
+// ('rahul', 'rahul123');
+ 
+19. Q15_studentform
+Question
+Create an HTML student-details form and an Express POST route that receives and displays the submitted fields.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/Q15_studentform/
+•	app.js
+•	index.html
+•	package.json
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/Q15_studentform.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file index.html in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file package.json in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+3. In a terminal opened inside this folder, run: npm install
+6. Run: node app.js
+7. If the program starts a server, visit http://localhost:3000 in your browser (unless the console/source specifies a different address).
+Answer – exact source and supporting files
+app.js
+const express = require('express');
+const app = express();
+ 
+// Read form data
+app.use(express.urlencoded({ extended: true }));
+ 
+// Display HTML form
+app.get('/', function(req, res)
+{
+    res.sendFile(__dirname + '/index.html');
+});
+ 
+// Receive form data
+app.post('/submit', function(req, res)
+{
+    let rollno = req.body.rollno;
+    let name = req.body.name;
+    let course = req.body.course;
+    let fees = req.body.fees;
+ 
+    res.send(
+        "<h1>Student Details</h1>" +
+        "Roll No: " + rollno + "<br>" +
+        "Name: " + name + "<br>" +
+        "Course: " + course + "<br>" +
+        "Fees: " + fees
+    );
+});
+ 
+// Start server
+app.listen(3000, function()
+{
+    console.log("Server running at http://localhost:3000");
+});
+index.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Form</title>
+</head>
+<body>
+ 
+    <h1>Student Details Form</h1>
+ 
+    <form action="/submit" method="POST">
+ 
+        Roll No:
+        <input type="text" name="rollno"><br><br>
+ 
+        Name:
+        <input type="text" name="name"><br><br>
+ 
+        Course:
+        <input type="text" name="course"><br><br>
+ 
+        Fees:
+        <input type="text" name="fees"><br><br>
+ 
+        <button type="submit">Submit</button>
+ 
+    </form>
+ 
+</body>
 </html>
+package.json
+{
+  "name": "q15_studentform",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}
+
+ 
+20. 16Q_lodash
+Question
+Use the Lodash library in a Node.js application.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/16Q_lodash/
+•	app.js
+•	package.json
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/16Q_lodash.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file package.json in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+3. In a terminal opened inside this folder, run: npm install
+6. Run: node app.js
+Answer – exact source and supporting files
+app.js
+const _ = require('lodash');
+ 
+let numbers = [50, 20, 80, 10, 40];
+ 
+console.log("Original Array:", numbers);
+ 
+// Sort array
+let sorted = _.sortBy(numbers);
+console.log("Sorted Array:", sorted);
+ 
+// Find maximum value
+let maximum = _.max(numbers);
+console.log("Maximum Value:", maximum);
+ 
+// Reverse array
+let reversed = _.reverse([...numbers]);
+console.log("Reversed Array:", reversed);
+package.json
+{
+  "name": "16q_lodash",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "lodash": "^4.18.1"
+  }
+}
+
+ 
+21. Q16_mysql
+Question
+Connect to MySQL and update an employee's salary by 10% using the employee ID entered by the user.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/Q16_mysql/
+•	app.js
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/Q16_mysql.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+4. Start MySQL and make sure the database and tables referenced in app.js already exist. The source uses its original host/user/password/database values; configure your local MySQL to match or edit credentials only if necessary.
+6. Run: node app.js
+7. When prompted in the terminal, type the requested input and press Enter.
+Answer – exact source and supporting files
+app.js
+const mysql = require('mysql');
+const readline = require('readline');
+ 
+// Connect to MySQL
+const con = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'company'
+});
+ 
+const r = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+ 
+con.connect(function(err)
+{
+    if(err) throw err;
+ 
+    console.log("Connected to MySQL");
+ 
+    r.question("Enter Employee ID: ", function(id)
+    {
+        // Increase salary by 10%
+        let sql = "UPDATE employee SET salary = salary * 1.10 WHERE eid = ?";
+ 
+        con.query(sql, [id], function(err, result)
+        {
+            if(err) throw err;
+ 
+            console.log("Salary updated successfully");
+ 
+            // Display all employee records
+            con.query("SELECT * FROM employee", function(err, result)
+            {
+                if(err) throw err;
+ 
+                console.log(result);
+ 
+                r.close();
+                con.end();
+            });
+        });
+    });
+});
+ 
+// CREATE DATABASE company;
+ 
+// USE company;
+ 
+// CREATE TABLE employee
+// (
+//     eid INT PRIMARY KEY,
+//     ename VARCHAR(50),
+//     salary FLOAT
+// );
+ 
+// INSERT INTO employee VALUES
+// (1, 'Rahul', 25000),
+// (2, 'Priya', 30000),
+// (3, 'Amit', 35000);
+ 
+22. 17Q_studentlodash
+Question
+Use Lodash operations with student data in a Node.js application.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/17Q_studentlodash/
+•	app.js
+•	package.json
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/17Q_studentlodash.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file package.json in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+3. In a terminal opened inside this folder, run: npm install
+6. Run: node app.js
+Answer – exact source and supporting files
+app.js
+const _ = require('lodash');
+ 
+let students = [
+    { rollno: 1, name: 'Rahul', course: 'BCA' },
+    { rollno: 2, name: 'Amit', course: 'MCA' },
+    { rollno: 3, name: 'Priya', course: 'BCA' },
+    { rollno: 4, name: 'Sneha', course: 'MCA' }
+];
+ 
+// Sort students by name
+let sorted = _.sortBy(students, ['name']);
+console.log("Students sorted by name:");
+console.log(sorted);
+ 
+// Search student by roll number
+let student = _.find(students, { rollno: 2 });
+console.log("Student with roll number 2:");
+console.log(student);
+ 
+// Display only BCA students
+let bcaStudents = _.filter(students, { course: 'BCA' });
+console.log("BCA Students:");
+console.log(bcaStudents);
+package.json
+{
+  "name": "17q_studentlodash",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "lodash": "^4.18.1"
+  }
+}
+
+ 
+23. Q17_image
+Question
+Create an Express image-upload form and use Multer to save the uploaded image in an uploads directory.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/Q17_image/
+•	app.js
+•	index.html
+•	package.json
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/Q17_image.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file index.html in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file package.json in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+3. In a terminal opened inside this folder, run: npm install
+5. Create an uploads folder inside this project before starting the server; the supplied Multer code writes uploaded files there.
+6. Run: node app.js
+7. If the program starts a server, visit http://localhost:3000 in your browser (unless the console/source specifies a different address).
+Answer – exact source and supporting files
+app.js
+const express = require('express');
+const multer = require('multer');
+ 
+const app = express();
+ 
+// Set storage location
+const storage = multer.diskStorage({
+    destination: function(req, file, cb)
+    {
+        cb(null, 'uploads/');
+    },
+ 
+    filename: function(req, file, cb)
+    {
+        cb(null, file.originalname);
+    }
+});
+ 
+const upload = multer({ storage: storage });
+ 
+// Display HTML form
+app.get('/', function(req, res)
+{
+    res.sendFile(__dirname + '/index.html');
+});
+ 
+// Upload image
+app.post('/upload', upload.single('image'), function(req, res)
+{
+    res.send("Image uploaded successfully!");
+});
+ 
+// Start server
+app.listen(3000, function()
+{
+    console.log("Server running at http://localhost:3000");
+});
+index.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Upload</title>
+</head>
+<body>
+ 
+    <h1>Upload Image</h1>
+ 
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+ 
+        Select Image:
+        <input type="file" name="image">
+ 
+        <br><br>
+ 
+        <button type="submit">Upload</button>
+ 
+    </form>
+ 
+</body>
+</html>
+package.json
+{
+  "name": "q17_image",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.3.0",
+    "multer": "^2.5.0"
+  }
+}
+
+ 
+24. 18Q_multievent
+Question
+Demonstrate handling multiple events/listeners in Node.js.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/18Q_multievent/
+•	app.js
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/18Q_multievent.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+6. Run: node app.js
+Answer – exact source and supporting files
+app.js
+const EventEmitter = require('events');
+ 
+const event = new EventEmitter();
+ 
+// First event
+event.on('start', function()
+{
+    console.log("Application Started!");
+});
+ 
+// Second event
+event.on('login', function(username)
+{
+    console.log(username + " logged in successfully!");
+});
+ 
+// Third event
+event.on('logout', function()
+{
+    console.log("User logged out!");
+});
+ 
+// Trigger events
+event.emit('start');
+event.emit('login', 'Rahul');
+event.emit('logout');
+ 
+25. Q18_employeeform
+Question
+Create an HTML employee-details form and an Express POST route that receives and displays the submitted fields.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/Q18_employeeform/
+•	app.js
+•	index.html
+•	package.json
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/Q18_employeeform.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file index.html in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file package.json in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+3. In a terminal opened inside this folder, run: npm install
+6. Run: node app.js
+7. If the program starts a server, visit http://localhost:3000 in your browser (unless the console/source specifies a different address).
+Answer – exact source and supporting files
+app.js
+const express = require('express');
+const app = express();
+ 
+// Read form data
+app.use(express.urlencoded({ extended: true }));
+ 
+// Display form
+app.get('/', function(req, res)
+{
+    res.sendFile(__dirname + '/index.html');
+});
+ 
+// Receive employee details
+app.post('/submit', function(req, res)
+{
+    let eid = req.body.eid;
+    let ename = req.body.ename;
+    let designation = req.body.designation;
+    let company = req.body.company;
+ 
+    res.send(
+        "<h1>Employee Details</h1>" +
+        "Employee ID: " + eid + "<br>" +
+        "Employee Name: " + ename + "<br>" +
+        "Designation: " + designation + "<br>" +
+        "Company: " + company
+    );
+});
+ 
+// Start server
+app.listen(3000, function()
+{
+    console.log("Server running at http://localhost:3000");
+});
+index.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Form</title>
+</head>
+<body>
+ 
+    <h1>Employee Details Form</h1>
+ 
+    <form action="/submit" method="POST">
+ 
+        Employee ID:
+        <input type="text" name="eid"><br><br>
+ 
+        Employee Name:
+        <input type="text" name="ename"><br><br>
+ 
+        Designation:
+        <input type="text" name="designation"><br><br>
+ 
+        Company:
+        <input type="text" name="company"><br><br>
+ 
+        <button type="submit">Submit</button>
+ 
+    </form>
+ 
+</body>
+</html>
+package.json
+{
+  "name": "q18_employeeform",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}
+
+ 
+26. 19Q_voting
+Question
+Run the voting example using the dependencies and source code supplied.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/19Q_voting/
+•	app.js
+•	package.json
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/19Q_voting.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file package.json in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+3. In a terminal opened inside this folder, run: npm install
+6. Run: node app.js
+7. If the program starts a server, visit http://localhost:3000 in your browser (unless the console/source specifies a different address).
+Answer – exact source and supporting files
+app.js
+const express = require('express');
+ 
+const app = express();
+ 
+app.get('/vote', function(req, res)
+{
+    let name = req.query.name;
+    let age = parseInt(req.query.age);
+ 
+    if(age >= 18)
+    {
+        res.send("Hello " + name + ", you are eligible to vote.");
+    }
+    else
+    {
+        res.send("Hello " + name + ", you are not eligible to vote.");
+    }
+});
+ 
+app.listen(3000, function()
+{
+    console.log("Server running at http://localhost:3000");
+});
+ 
+// npm init -y
+// npm install express
+ 
+// http://localhost:3000/vote?name=Rahul&age=20
+ 
+// http://localhost:3000/vote?name=Rahul&age=16
+package.json
+{
+  "name": "19q_voting",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}
+
+ 
+27. Q19_mongodb
+Question
+Connect to MongoDB, select the library database and books collection, and insert the book records defined in the source.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/Q19_mongodb/
+•	app.js
+•	package.json
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/Q19_mongodb.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file package.json in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+3. In a terminal opened inside this folder, run: npm install
+4. Start MongoDB locally and ensure it is listening at the connection URL used in app.js.
+6. Run: node app.js
+Answer – exact source and supporting files
+app.js
+const { MongoClient } = require('mongodb');
+ 
+// MongoDB connection URL
+const url = "mongodb://127.0.0.1:27017";
+ 
+const client = new MongoClient(url);
+ 
+async function main()
+{
+    await client.connect();
+ 
+    console.log("Connected to MongoDB");
+ 
+    // Select database
+    const db = client.db("library");
+ 
+    // Select collection
+    const collection = db.collection("books");
+ 
+    // Insert 5 books
+    const result = await collection.insertMany([
+        {
+            title: "Java",
+            author: "James",
+            year: 2022,
+            price: 600
+        },
+        {
+            title: "Python",
+            author: "Guido",
+            year: 2021,
+            price: 450
+        },
+        {
+            title: "Node JS",
+            author: "Ryan",
+            year: 2023,
+            price: 700
+        },
+        {
+            title: "MongoDB",
+            author: "Kristina",
+            year: 2022,
+            price: 550
+        },
+        {
+            title: "C Programming",
+            author: "Dennis",
+            year: 2020,
+            price: 400
+        }
+    ]);
+ 
+    console.log("5 books inserted successfully");
+ 
+    await client.close();
+}
+ 
+main();
+package.json
+{
+  "name": "q19_mongodb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "mongodb": "^7.7.0"
+  }
+}
+
+ 
+28. 20Q_copyfile
+Question
+Copy data from source.txt to destination.txt using the supplied Node.js program.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/20Q_copyfile/
+•	app.js
+•	destination.txt
+•	source.txt
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/20Q_copyfile.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file destination.txt in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file source.txt in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+6. Run: node app.js
+Answer – exact source and supporting files
+app.js
+const fs = require('fs');
+ 
+fs.copyFile('source.txt', 'destination.txt', function(err)
+{
+    if(err) throw err;
+ 
+    console.log("File copied successfully!");
+});
+destination.txt
+Hello! This is the source file.
+We are learning Node.js file operations.
+source.txt
+Hello! This is the source file.
+We are learning Node.js file operations.
+ 
+29. Q20_books
+Question
+Connect to MongoDB and retrieve/display books whose price is greater than 500.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/Q20_books/
+•	app.js
+•	package.json
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/Q20_books.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file package.json in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+3. In a terminal opened inside this folder, run: npm install
+4. Start MongoDB locally and ensure it is listening at the connection URL used in app.js.
+6. Run: node app.js
+Answer – exact source and supporting files
+app.js
+const { MongoClient } = require('mongodb');
+ 
+const url = "mongodb://127.0.0.1:27017";
+ 
+const client = new MongoClient(url);
+ 
+async function main()
+{
+    await client.connect();
+ 
+    console.log("Connected to MongoDB");
+ 
+    // Select database
+    const db = client.db("library");
+ 
+    // Select collection
+    const collection = db.collection("books");
+ 
+    // Find books with price greater than 500
+    const books = await collection.find({ price: { $gt: 500 } }).toArray();
+ 
+    console.log("Books with price greater than 500:");
+ 
+    console.log(books);
+ 
+    await client.close();
+}
+ 
+main();
+package.json
+{
+  "name": "q20_books",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "mongodb": "^7.7.0"
+  }
+}
+
+ 
+30. 21Q_register
+Question
+Run the registration example using the dependencies and source code supplied.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/21Q_register/
+•	app.js
+•	package.json
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/21Q_register.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file package.json in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+3. In a terminal opened inside this folder, run: npm install
+6. Run: node app.js
+7. If the program starts a server, visit http://localhost:3000 in your browser (unless the console/source specifies a different address).
+Answer – exact source and supporting files
+app.js
+const express = require('express');
+ 
+const app = express();
+ 
+app.use(express.urlencoded({ extended: true }));
+ 
+// Display registration form
+app.get('/', function(req, res)
+{
+    res.send(`
+        <h2>Student Registration Form</h2>
+ 
+        <form method="POST" action="/register">
+ 
+            Name:
+            <input type="text" name="name" required>
+            <br><br>
+ 
+            Email:
+            <input type="email" name="email" required>
+            <br><br>
+ 
+            Password:
+            <input type="password" name="password" required>
+            <br><br>
+ 
+            <button type="submit">Register</button>
+ 
+        </form>
+    `);
+});
+ 
+// Validate form
+app.post('/register', function(req, res)
+{
+    let name = req.body.name;
+    let email = req.body.email;
+    let password = req.body.password;
+ 
+    if(name && email && password)
+    {
+        res.send("Registration Successful!");
+    }
+    else
+    {
+        res.send("Please fill all fields!");
+    }
+});
+ 
+app.listen(3000, function()
+{
+    console.log("Server running at http://localhost:3000");
+});
+package.json
+{
+  "name": "21q_register",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}
+
+ 
+31. Q21_textupload
+Question
+Create an Express text-file upload form and use Multer to save the uploaded file in an uploads directory.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/Q21_textupload/
+•	app.js
+•	index.html
+•	package.json
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/Q21_textupload.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file index.html in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file package.json in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+3. In a terminal opened inside this folder, run: npm install
+5. Create an uploads folder inside this project before starting the server; the supplied Multer code writes uploaded files there.
+6. Run: node app.js
+7. If the program starts a server, visit http://localhost:3000 in your browser (unless the console/source specifies a different address).
+Answer – exact source and supporting files
+app.js
+const express = require('express');
+const multer = require('multer');
+ 
+const app = express();
+ 
+const storage = multer.diskStorage({
+    destination: function(req, file, cb)
+    {
+        cb(null, 'uploads/');
+    },
+ 
+    filename: function(req, file, cb)
+    {
+        cb(null, file.originalname);
+    }
+});
+ 
+const upload = multer({ storage: storage });
+ 
+app.get('/', function(req, res)
+{
+    res.sendFile(__dirname + '/index.html');
+});
+ 
+app.post('/upload', upload.single('file'), function(req, res)
+{
+    res.send("Text file uploaded successfully!");
+});
+ 
+app.listen(3000, function()
+{
+    console.log("Server running on port 3000");
+});
+index.html
+<!DOCTYPE html>
+<html>
+<body>
+ 
+<h2>Upload Text File</h2>
+ 
+<form action="/upload" method="POST" enctype="multipart/form-data">
+ 
+    Select Text File:
+    <input type="file" name="file" accept=".txt">
+ 
+    <button type="submit">Upload</button>
+ 
+</form>
+ 
+</body>
+</html>
+package.json
+{
+  "name": "q21_textupload",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.3.0",
+    "multer": "^2.5.0"
+  }
+}
+
+ 
+32. 22Q_time
+Question
+Run the time-related Node.js example contained in app.js.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/22Q_time/
+•	app.js
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/22Q_time.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+6. Run: node app.js
+Answer – exact source and supporting files
+app.js
+const EventEmitter = require('events');
+ 
+const event = new EventEmitter();
+ 
+let hour = new Date().getHours();
+ 
+// Morning event
+event.on('morning', function()
+{
+    console.log("Good Morning!");
+});
+ 
+// Afternoon event
+event.on('afternoon', function()
+{
+    console.log("Good Afternoon!");
+});
+ 
+// Evening event
+event.on('evening', function()
+{
+    console.log("Good Evening!");
+});
+ 
+// Check current time and trigger event
+if(hour < 12)
+{
+    event.emit('morning');
+}
+else if(hour < 17)
+{
+    event.emit('afternoon');
+}
+else
+{
+    event.emit('evening');
+}
+ 
+33. Q22_studentcrud
+Question
+Connect to MySQL and demonstrate student CRUD operations using the students table.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/Q22_studentcrud/
+•	app.js
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/Q22_studentcrud.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+4. Start MySQL and make sure the database and tables referenced in app.js already exist. The source uses its original host/user/password/database values; configure your local MySQL to match or edit credentials only if necessary.
+6. Run: node app.js
+Answer – exact source and supporting files
+app.js
+const mysql = require('mysql');
+ 
+const con = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'college_db'
+});
+ 
+con.connect(function(err)
+{
+    if(err) throw err;
+    console.log("Connected to MySQL");
+ 
+    // INSERT
+    con.query(
+        "INSERT INTO students VALUES (1, 'Rahul', 80)",
+        function(err)
+        {
+            if(err) throw err;
+            console.log("Student inserted");
+ 
+            // FETCH
+            con.query("SELECT * FROM students", function(err, result)
+            {
+                if(err) throw err;
+                console.log("Student Records:", result);
+ 
+                // UPDATE
+                con.query(
+                    "UPDATE students SET marks = 90 WHERE rollno = 1",
+                    function(err)
+                    {
+                        if(err) throw err;
+                        console.log("Student updated");
+ 
+                        // DELETE
+                        con.query(
+                            "DELETE FROM students WHERE rollno = 1",
+                            function(err)
+                            {
+                                if(err) throw err;
+                                console.log("Student deleted");
+                                con.end();
+                            }
+                        );
+                    }
+                );
+            });
+        }
+    );
+});
+ 
+ 
+// CREATE DATABASE college_db;
+// USE college_db;
+ 
+// CREATE TABLE students(
+//     rollno INT PRIMARY KEY,
+//     name VARCHAR(50),
+//     marks INT
+// );
+ 
+ 
+// Q23
+ 
+// app.js
+// const mysql = require('mysql');
+ 
+// const con = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     password: '',
+//     database: 'college_db'
+// });
+ 
+// con.connect(function(err)
+// {
+//     if(err) throw err;
+//     console.log("Connected to MySQL");
+ 
+//     // INSERT STUDENT
+//     function insertStudent()
+//     {
+//         let sql = "INSERT INTO students VALUES (1, 'Rahul', 'MCA', 80)";
+//         con.query(sql, function(err)
+//         {
+//             if(err) throw err;
+//             console.log("Student inserted");
+//             fetchStudents();
+//         });
+//     }
+ 
+//     // FETCH STUDENTS
+//     function fetchStudents()
+//     {
+//         con.query("SELECT * FROM students", function(err, result)
+//         {
+//             if(err) throw err;
+//             console.log("Student Records:", result);
+//             updateStudent();
+//         });
+//     }
+ 
+//     // UPDATE MARKS
+//     function updateStudent()
+//     {
+//         let sql = "UPDATE students SET marks = 90 WHERE id = 1";
+//         con.query(sql, function(err)
+//         {
+//             if(err) throw err;
+//             console.log("Marks updated");
+//             deleteStudent();
+//         });
+//     }
+ 
+//     // DELETE STUDENT
+//     function deleteStudent()
+//     {
+//         con.query("DELETE FROM students WHERE id = 1", function(err)
+//         {
+//             if(err) throw err;
+//             console.log("Student deleted");
+//             con.end();
+//         });
+//     }
+ 
+//     insertStudent();
+// });
+ 
+// CREATE DATABASE college_db;
+// USE college_db;
+ 
+// CREATE TABLE students(
+//     id INT PRIMARY KEY,
+//     name VARCHAR(50),
+//     course VARCHAR(50),
+//     marks INT
+// );
+ 
+34. 23Q_mysql_rest_api
+Question
+Create/run a MySQL-backed REST API using the supplied Node.js application.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/23Q_mysql_rest_api/
+•	app.js
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/23Q_mysql_rest_api.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+4. Start MySQL and make sure the database and tables referenced in app.js already exist. The source uses its original host/user/password/database values; configure your local MySQL to match or edit credentials only if necessary.
+6. Run: node app.js
+7. If the program starts a server, visit http://localhost:3000 in your browser (unless the console/source specifies a different address).
+Answer – exact source and supporting files
+app.js
+const express = require('express');
+const mysql = require('mysql');
+ 
+const app = express();
+ 
+app.use(express.json());
+ 
+// MySQL connection
+const con = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'college_db'
+});
+ 
+con.connect(function(err)
+{
+    if(err) throw err;
+    console.log("Connected to MySQL!");
+});
+ 
+// READ - Get all students
+app.get('/students', function(req, res)
+{
+    con.query("SELECT * FROM students", function(err, result)
+    {
+        if(err) throw err;
+        res.json(result);
+    });
+});
+ 
+// CREATE - Add student
+app.post('/students', function(req, res)
+{
+    let student = req.body;
+ 
+    let sql = "INSERT INTO students VALUES (?, ?, ?, ?)";
+ 
+    con.query(sql,
+        [student.id, student.name, student.course, student.marks],
+        function(err, result)
+        {
+            if(err) throw err;
+            res.send("Student inserted successfully!");
+        });
+});
+ 
+// UPDATE - Update student
+app.put('/students/:id', function(req, res)
+{
+    let sql = "UPDATE students SET name=?, course=?, marks=? WHERE id=?";
+ 
+    con.query(sql,
+        [req.body.name, req.body.course, req.body.marks, req.params.id],
+        function(err, result)
+        {
+            if(err) throw err;
+            res.send("Student updated successfully!");
+        });
+});
+ 
+// DELETE - Delete student
+app.delete('/students/:id', function(req, res)
+{
+    con.query("DELETE FROM students WHERE id=?",
+        [req.params.id],
+        function(err, result)
+        {
+            if(err) throw err;
+            res.send("Student deleted successfully!");
+        });
+});
+ 
+app.listen(3000, function()
+{
+    console.log("Server running at http://localhost:3000");
+});
+ 
+ 
+// npm init -y
+// npm install express mysql
+ 
+ 
+// CREATE DATABASE college_db;
+ 
+// USE college_db;
+ 
+// CREATE TABLE students (
+//     id INT PRIMARY KEY,
+//     name VARCHAR(50),
+//     course VARCHAR(50),
+//     marks INT
+// );
+ 
+ 
+ 
+ 
+// Step 5: Test API using Postman
+// Keep the server running and open Postman.
+ 
+// 1. CREATE – Insert a student
+// - Method: POST
+// - URL: http://localhost:3000/students
+// - Select Body → raw → JSON.
+// {
+//     "id": 1,
+//     "name": "Rahul",
+//     "course": "MCA",
+//     "marks": 85
+// }
+ 
+ 
+// Expected response:
+// Student inserted successfully!
+ 
+ 
+// 2. READ – Display all students
+// - Method: GET
+// - URL: http://localhost:3000/students
+// Expected response:
+// [
+//     {
+//         "id": 1,
+//         "name": "Rahul",
+//         "course": "MCA",
+//         "marks": 85
+//     }
+// ]
+ 
+ 
+// 3. UPDATE – Update student
+// - Method: PUT
+// - URL: http://localhost:3000/students/1
+// - Body → raw → JSON.
+// {
+//     "name": "Rahul Sharma",
+//     "course": "MCA",
+//     "marks": 90
+// }
+ 
+ 
+// Expected response:
+// Student updated successfully!
+ 
+ 
+// 4. DELETE – Delete student
+// - Method: DELETE
+// - URL: http://localhost:3000/students/1
+// Expected response:
+// Student deleted successfully!
+ 
+35. 24Q_mongodb_rest_api
+Question
+Create/run a MongoDB-backed REST API using the supplied Node.js application.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/24Q_mongodb_rest_api/
+•	app.js
+•	package.json
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/24Q_mongodb_rest_api.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file package.json in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+3. In a terminal opened inside this folder, run: npm install
+4. Start MongoDB locally and ensure it is listening at the connection URL used in app.js.
+6. Run: node app.js
+7. If the program starts a server, visit http://localhost:3000 in your browser (unless the console/source specifies a different address).
+Answer – exact source and supporting files
+app.js
+const express = require('express');
+const mongoose = require('mongoose');
+ 
+const app = express();
+ 
+app.use(express.json());
+ 
+// Connect to MongoDB
+mongoose.connect('mongodb://127.0.0.1:27017/bookdb')
+.then(() => console.log("MongoDB Connected!"))
+.catch(err => console.log(err));
+ 
+// Create Book Schema
+const bookSchema = new mongoose.Schema({
+    name: String,
+    author: String,
+    price: Number
+});
+ 
+// Create Book Model
+const Book = mongoose.model('Book', bookSchema);
+ 
+// CREATE - Insert book
+app.post('/books', async function(req, res)
+{
+    const book = new Book(req.body);
+    await book.save();
+ 
+    res.send("Book inserted successfully!");
+});
+ 
+// READ - Display all books
+app.get('/books', async function(req, res)
+{
+    const books = await Book.find();
+ 
+    res.json(books);
+});
+ 
+// UPDATE - Update book
+app.put('/books/:id', async function(req, res)
+{
+    await Book.findByIdAndUpdate(req.params.id, req.body);
+ 
+    res.send("Book updated successfully!");
+});
+ 
+// DELETE - Delete book
+app.delete('/books/:id', async function(req, res)
+{
+    await Book.findByIdAndDelete(req.params.id);
+ 
+    res.send("Book deleted successfully!");
+});
+ 
+// Start server
+app.listen(3000, function()
+{
+    console.log("Server running at http://localhost:3000");
+});
+ 
+// mongodb://127.0.0.1:27017
+ 
+// npm init -y
+// npm install express mongoose
+ 
+ 
+// Step 5: Test using Postman
+// Keep the Node.js server running.
+ 
+// 1. CREATE – Insert a book
+// - Method: POST
+// - URL: http://localhost:3000/books
+// - Body → raw → JSON
+// {
+//     "name": "Java Programming",
+//     "author": "James",
+//     "price": 600
+// }
+ 
+ 
+// Expected response:
+// Book inserted successfully!
+ 
+ 
+// 2. READ – Display all books
+// - Method: GET
+// - URL: http://localhost:3000/books
+// Expected response:
+// [
+//     {
+//         "_id": "MongoDB-generated-id",
+//         "name": "Java Programming",
+//         "author": "James",
+//         "price": 600
+//     }
+// ]
+ 
+ 
+// 3. UPDATE – Update a book
+ 
+// First copy the book's actual _id from the GET response.
+// - Method: PUT
+// - URL: http://localhost:3000/books/PASTE_ID_HERE
+// - Body → raw → JSON
+// {
+//     "name": "Advanced Java",
+//     "author": "James",
+//     "price": 800
+// }
+ 
+ 
+// Expected response:
+// Book updated successfully!
+ 
+ 
+// 4. DELETE – Delete a book
+// - Method: DELETE
+// - URL: http://localhost:3000/books/PASTE_ID_HERE
+// Expected response:
+// Book deleted successfully!
+ 
+ 
+ 
+ 
+ 
+// 4. What does "Body → raw → JSON" mean?
+// This is not a file or folder. It is an option inside Postman.
+ 
+// When testing your POST request:
+// 1. Open Postman.
+// 2. Select POST.
+// 3. Enter http://localhost:3000/books.
+// 4. Click Body.
+// 5. Select raw.
+// 6. Select JSON from the dropdown.
+// 7. Paste this:
+// {
+//     "name": "Java Programming",
+//     "author": "James",
+//     "price": 600
+// }
+ 
+ 
+// 8. Click Send.
+package.json
+{
+  "name": "24q_mongodb_rest_api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.3.0",
+    "mongodb": "^7.7.0",
+    "mongoose": "^9.11.4"
+  }
+}
+
+ 
+36. Q24_studenttable
+Question
+Create an Express page that queries MySQL student records and displays them in an HTML table.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/Q24_studenttable/
+•	app.js
+•	package.json
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/Q24_studenttable.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+2. Create the file package.json in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+3. In a terminal opened inside this folder, run: npm install
+4. Start MySQL and make sure the database and tables referenced in app.js already exist. The source uses its original host/user/password/database values; configure your local MySQL to match or edit credentials only if necessary.
+6. Run: node app.js
+7. If the program starts a server, visit http://localhost:3000 in your browser (unless the console/source specifies a different address).
+Answer – exact source and supporting files
+app.js
+const express = require('express');
+const mysql = require('mysql');
+ 
+const app = express();
+ 
+const con = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'college_db'
+});
+ 
+app.get('/', function(req, res)
+{
+    con.query("SELECT * FROM students", function(err, result)
+    {
+        if(err) throw err;
+ 
+        let html = "<h2>Student Records</h2>";
+        html += "<table border='1'>";
+        html += "<tr><th>ID</th><th>Name</th><th>Course</th><th>Marks</th></tr>";
+ 
+        result.forEach(function(student)
+        {
+            html += "<tr>";
+            html += "<td>" + student.id + "</td>";
+            html += "<td>" + student.name + "</td>";
+            html += "<td>" + student.course + "</td>";
+            html += "<td>" + student.marks + "</td>";
+            html += "</tr>";
+        });
+ 
+        html += "</table>";
+ 
+        res.send(html);
+    });
+});
+ 
+app.listen(3000, function()
+{
+    console.log("Server running on port 3000");
+});
+package.json
+{
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}
+
+ 
+37. Q25_displaystudents
+Question
+Connect to MySQL, fetch all records from the students table, and print them in the terminal.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/Q25_displaystudents/
+•	app.js
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/Q25_displaystudents.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+4. Start MySQL and make sure the database and tables referenced in app.js already exist. The source uses its original host/user/password/database values; configure your local MySQL to match or edit credentials only if necessary.
+6. Run: node app.js
+Answer – exact source and supporting files
+app.js
+const mysql = require('mysql');
+ 
+const con = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'college_db'
+});
+ 
+con.connect(function(err)
+{
+    if(err) throw err;
+ 
+    console.log("Connected to MySQL");
+ 
+    con.query("SELECT * FROM students", function(err, result)
+    {
+        if(err) throw err;
+ 
+        console.log("All Student Records:");
+        console.log(result);
+ 
+        con.end();
+    });
+});
+ 
+38. Q26_university
+Question
+Create a Node.js HTTP server that displays a list of programs offered by a university.
+Folder and files to create
+Create/open this folder: Nodejs_Solve/Q26_university/
+•	app.js
+Steps to solve and run
+1. Create/open the folder Nodejs_Solve/Q26_university.
+2. Create the file app.js in that folder (or its indicated subfolder) and paste the exact content from the matching section below.
+6. Run: node app.js
+7. If the program starts a server, visit http://localhost:3000 in your browser (unless the console/source specifies a different address).
+Answer – exact source and supporting files
+app.js
+const http = require('http');
+ 
+const server = http.createServer(function(req, res)
+{
+    res.writeHead(200, {'Content-Type': 'text/html'});
+ 
+    res.write("<h1>Programs Offered by University</h1>");
+ 
+    res.write("<ul>");
+    res.write("<li>BBA</li>");
+    res.write("<li>BCA</li>");
+    res.write("<li>MBA</li>");
+    res.write("<li>MCA</li>");
+    res.write("<li>B.Tech</li>");
+    res.write("<li>M.Tech</li>");
+    res.write("</ul>");
+ 
+    res.end();
+});
+ 
+server.listen(3000, function()
+{
+    console.log("Server running at http://localhost:3000");
+});
